@@ -22,6 +22,7 @@
 
     <div class="main">
         <button id="otherBtn" {% if other_btn_disabled %}disabled{% endif %} onclick="sortData()" type="button">Sort by File Extension</button>
+        <button onclick="refreshList()">Refresh List</button>
         <h3>Items:</h3>
         <ul class="items">
             {% for item in items %}

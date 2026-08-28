@@ -1,9 +1,15 @@
 function sortData() {
-
     fetch('/sort-files', { method: 'POST' })
-
+        .then(() => {
+            // Force browser to display the redirected/refreshed page
+            window.location.reload();
+        })
+        .catch(error => console.error('Error sorting files:', error));
 }
 
+function refreshList() {
+    window.location.href = '/refresh-1'
+}
 
 document.querySelectorAll('.clickable-item').forEach(item => {
 
