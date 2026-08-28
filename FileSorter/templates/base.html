@@ -39,7 +39,9 @@
         </ul>
     </div>
 
-    <script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <!-- <script>
         function sortData() {
             fetch('/sort-files', { method: 'POST' })
         }
@@ -63,7 +65,7 @@
                 .catch(error => console.error('Error:', error));
             });
         });
-    </script>
+    </script> -->
 
 </body>
 </html>
