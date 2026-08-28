@@ -1,0 +1,6 @@
+.venv
+
+FileSorter/templates/listItem.html
+FileSorter/templates/listTest.html
+FileSorter/templates/name.html
+FileSorter/utils/__pycache__

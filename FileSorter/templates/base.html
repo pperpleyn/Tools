@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paperplane's File Sorter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="header">
+        <h1>File Sorter</h1>
+    </div>
+
+    <div class="pathName">
+        <form method="post">
+            <label for="folderPath">Folder Path: </label>
+            <input type="text" name="folderPath" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div class="main">
+        <button id="otherBtn" {% if other_btn_disabled %}disabled{% endif %} onclick="sortData()" type="button">Sort by File Extension</button>
+        <h3>Items:</h3>
+        <ul class="items">
+            {% for item in items %}
+                <li class="clickable-item" data-path="{{ item.path }}" >
+                    {% if item.type == 'Folder' %}
+                        📁
+                    {% elif item.type == 'File' %}
+                        📄
+                    {% else %}
+                        ❓
+                    {% endif %}
+                    {{ item.name }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        function sortData() {
+            fetch('/sort-files', { method: 'POST' })
+        }
+
+        document.querySelectorAll('.clickable-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const path = this.getAttribute('data-path');
+                
+                // Send fetch request directly inside event listener
+                fetch('/process-file', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ item: path }) // Sends key matching Flask's data.get('item')
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+
+</body>
+</html>
