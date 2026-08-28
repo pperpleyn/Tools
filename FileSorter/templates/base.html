@@ -16,28 +16,30 @@
         <form method="post">
             <label for="folderPath">Folder Path: </label>
             <input type="text" name="folderPath" required>
-            <input type="submit" value="Submit">
+            <input class="searchBtn" type="submit" value="Search">
         </form>
     </div>
 
     <div class="main">
+        <h3>Items:</h3>
         <button id="otherBtn" {% if other_btn_disabled %}disabled{% endif %} onclick="sortData()" type="button">Sort by File Extension</button>
         <button onclick="refreshList()">Refresh List</button>
-        <h3>Items:</h3>
-        <ul class="items">
-            {% for item in items %}
-                <li class="clickable-item" data-path="{{ item.path }}" >
-                    {% if item.type == 'Folder' %}
-                        📁
-                    {% elif item.type == 'File' %}
-                        📄
-                    {% else %}
-                        ❓
-                    {% endif %}
-                    {{ item.name }}
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="list">
+            <ul class="items">
+                {% for item in items %}
+                    <li class="clickable-item" data-path="{{ item.path }}" >
+                        {% if item.type == 'Folder' %}
+                            📁
+                        {% elif item.type == 'File' %}
+                            📄
+                        {% else %}
+                            ❓
+                        {% endif %}
+                        {{ item.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

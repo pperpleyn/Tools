@@ -3,3 +3,28 @@ body {
     font-family: 'Courier New', Courier, monospace;
     color: antiquewhite;
 }
+h3 {
+    margin: 0;
+}
+.main {
+    margin: 2vmin;
+}
+button {
+    margin-bottom: 4px;
+}
+
+.list {
+    background-color: bisque;
+    color: rgb(76, 76, 76);
+    padding: 0 1vmin;
+    max-height: 50vmin;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.clickable-item {
+    max-height: 50vmin;       /* Restricts list height */
+    overflow-y: auto;        /* Enables scrolling inside the list */
+    padding-right: 10px;
+
+}
